@@ -141,7 +141,7 @@ public class Tests extends BaseDriver {
 
         driver.get("https://demo.nopcommerce.com/register?returnUrl=%2F");
 
-        List<String> tabMenuList=new ArrayList<>(Arrays.asList("Computers","Electronics","Apparel","Digital downloads","Books","Jewelry","Gift Cards"));
+        List<String> tabMenuList = new ArrayList<>(Arrays.asList("Computers", "Electronics", "Apparel", "Digital downloads", "Books", "Jewelry", "Gift Cards"));
 
         List<WebElement> tabMenu = driver.findElements(By.xpath("//ul[@class='top-menu notmobile']/li"));
 
@@ -158,12 +158,12 @@ public class Tests extends BaseDriver {
         WebElement giftCards = driver.findElement(By.xpath("(//ul[@class='top-menu notmobile']/li)[7]"));
         giftCards.click();
 
-        List<WebElement>physicalGiftCards = driver.findElements(By.xpath(".//a[contains(text(),'Physical')]"));
+        List<WebElement> physicalGiftCards = driver.findElements(By.xpath(".//a[contains(text(),'Physical')]"));
         physicalGiftCards.get(((int) (Math.random() * physicalGiftCards.size()))).click();
 
         WebElement recipientName = driver.findElement(By.className("recipient-name"));
 
-        Actions actions=new Actions(driver);
+        Actions actions = new Actions(driver);
         Action action = actions.
                 moveToElement(recipientName).
                 click().
@@ -177,10 +177,10 @@ public class Tests extends BaseDriver {
                 build();
         action.perform();
 
-        WebElement addToCart= driver.findElement(By.xpath("(//button[@type='button'])[1]"));
+        WebElement addToCart = driver.findElement(By.xpath("(//button[@type='button'])[1]"));
         addToCart.click();
 
-        WebElement verificationMessage= driver.findElement(By.xpath("//p[text()='The product has been added to your ']"));
+        WebElement verificationMessage = driver.findElement(By.xpath("//p[text()='The product has been added to your ']"));
 
         Assert.assertEquals(verificationMessage.getText(), "The product has been added to your shopping cart");
     }
@@ -200,24 +200,30 @@ public class Tests extends BaseDriver {
         WebElement desktops = driver.findElement(By.xpath("(//a[text()='Desktops '])[1]"));
         desktops.click();
 
-        WebElement buildComputer= driver.findElement(By.xpath("//a[text()='Build your own computer']"));
+        WebElement buildComputer = driver.findElement(By.xpath("//a[text()='Build your own computer']"));
         buildComputer.click();
 
         wait.until(ExpectedConditions.elementToBeClickable(By.id("product_attribute_2")));
-        WebElement ram= driver.findElement(By.id("product_attribute_2"));
-        JavascriptExecutor js=(JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);",ram);
+        WebElement ram = driver.findElement(By.id("product_attribute_2"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", ram);
 
-        Select ramSelect=new Select(ram);
-        ramSelect.selectByIndex((int)(Math.random() *3));
+        action = actions.moveToElement(ram).build();
+        action.perform();
 
-        List<WebElement>hdd = driver.findElements(By.xpath("//input[@name='product_attribute_3']"));
+        List<WebElement> options = driver.findElements(By.cssSelector("select[id='product_attribute_2']>option"));
+        options.get((int) (Math.random() * options.size()-1)+1).click();
+
+//        Select ramSelect=new Select(ram);
+//        ramSelect.selectByIndex((int)(Math.random() *3));
+
+        List<WebElement> hdd = driver.findElements(By.xpath("//input[@name='product_attribute_3']"));
         hdd.get((int) (Math.random() * hdd.size())).click();
 
-        WebElement addToCart= driver.findElement(By.id("add-to-cart-button-1"));
+        WebElement addToCart = driver.findElement(By.id("add-to-cart-button-1"));
         addToCart.click();
 
-        WebElement verificationMessage= driver.findElement(By.xpath("//p[text()='The product has been added to your ']"));
+        WebElement verificationMessage = driver.findElement(By.xpath("//p[text()='The product has been added to your ']"));
 
         Assert.assertEquals(verificationMessage.getText(), "The product has been added to your shopping cart");
     }
@@ -231,10 +237,10 @@ public class Tests extends BaseDriver {
         WebElement searchBox = driver.findElement(By.id("small-searchterms"));
         searchBox.sendKeys(searchedWord);
 
-        WebElement searchButton= driver.findElement(By.xpath("//button[text()='Search']"));
+        WebElement searchButton = driver.findElement(By.xpath("//button[text()='Search']"));
         searchButton.click();
 
-        WebElement adobe= driver.findElement(By.xpath("//h2[@class='product-title']/a"));
+        WebElement adobe = driver.findElement(By.xpath("//h2[@class='product-title']/a"));
 
         Assert.assertTrue(adobe.getText().contains("Adobe Photoshop CS4"));
     }
