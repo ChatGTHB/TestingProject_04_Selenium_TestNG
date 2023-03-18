@@ -203,20 +203,14 @@ public class Tests extends BaseDriver {
         WebElement buildComputer = driver.findElement(By.xpath("//a[text()='Build your own computer']"));
         buildComputer.click();
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("product_attribute_2")));
-        WebElement ram = driver.findElement(By.id("product_attribute_2"));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);", ram);
-
-        action = actions.moveToElement(ram).build();
+        WebElement ramSelect = wait.until(ExpectedConditions.elementToBeClickable(By.id("product_attribute_2")));
+        
+        action = actions.moveToElement(ramSelect).build();
         action.perform();
 
-        List<WebElement> options = driver.findElements(By.cssSelector("select[id='product_attribute_2']>option"));
-        options.get((int) (Math.random() * options.size()-1)+1).click();
-
-//        Select ramSelect=new Select(ram);
-//        ramSelect.selectByIndex((int)(Math.random() *3));
-
+        List<WebElement> ramOptions = driver.findElements(By.cssSelector("select[id='product_attribute_2']>option"));
+        ramOptions.get((int) (Math.random() * ramOptions.size()-1)+1).click();
+        
         List<WebElement> hdd = driver.findElements(By.xpath("//input[@name='product_attribute_3']"));
         hdd.get((int) (Math.random() * hdd.size())).click();
 
