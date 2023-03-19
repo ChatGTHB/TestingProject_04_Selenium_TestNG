@@ -95,7 +95,7 @@ public class Tests extends BaseDriver {
     }
 
     @Test(dataProvider = "getData", dependsOnMethods = {"registrationTest"}, priority = 3)
-    void dataProviderLogin(String eMailPro, String passwordPro) {
+    void dataProviderLoginTest(String eMailPro, String passwordPro) {
 
         driver.get("https://demo.nopcommerce.com/register?returnUrl=%2F");
 

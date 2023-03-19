@@ -1,4 +1,4 @@
-package project_04_Selenium_TestNG_Version2;
+package project_04_Selenium_TestNG_Version_2;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -10,7 +10,7 @@ import utility.BaseDriver;
 public class Test07 extends BaseDriver {
 
 
-    @Test(priority = 7)
+    @Test
     @Parameters("searchedWord")
     void parameterizedSearchTest(String searchedWord) {
 

@@ -1,4 +1,4 @@
-package project_04_Selenium_TestNG_Version2;
+package project_04_Selenium_TestNG_Version_2;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Action;
@@ -94,7 +94,7 @@ public class TestsFrom01To06 extends BaseDriver {
     }
 
     @Test(dataProvider = "getData", dependsOnMethods = {"registrationTest"}, priority = 3)
-    void dataProviderLogin(String eMailPro, String passwordPro) {
+    void dataProviderLoginTest(String eMailPro, String passwordPro) {
 
         driver.get("https://demo.nopcommerce.com/register?returnUrl=%2F");
 
