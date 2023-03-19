@@ -1,10 +1,8 @@
-package Project_04_Selenium_TestNG;
+package project_04_Selenium_TestNG_Version2;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.Parameters;
 import utility.BaseDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -20,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Tests extends BaseDriver {
+public class TestsFrom01To06 extends BaseDriver {
 
     String eMailRandom;
 
@@ -220,23 +218,6 @@ public class Tests extends BaseDriver {
         WebElement verificationMessage = driver.findElement(By.xpath("//p[text()='The product has been added to your ']"));
 
         Assert.assertEquals(verificationMessage.getText(), "The product has been added to your shopping cart");
-    }
-
-    @Test(priority = 7)
-    @Parameters("searchedWord")
-    void parameterizedSearchTest(String searchedWord) {
-
-        driver.get("https://demo.nopcommerce.com/register?returnUrl=%2F");
-
-        WebElement searchBox = driver.findElement(By.id("small-searchterms"));
-        searchBox.sendKeys(searchedWord);
-
-        WebElement searchButton = driver.findElement(By.xpath("//button[text()='Search']"));
-        searchButton.click();
-
-        WebElement adobe = driver.findElement(By.xpath("//h2[@class='product-title']/a"));
-
-        Assert.assertTrue(adobe.getText().contains("Adobe Photoshop CS4"));
     }
 }
 

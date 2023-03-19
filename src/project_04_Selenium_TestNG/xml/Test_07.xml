@@ -3,7 +3,7 @@
     <test name="Test7">
         <parameter name="searchedWord" value="Adobe Photoshop CS4"/>
         <classes>
-            <class name="Project_04_Selenium_TestNG.Tests">
+            <class name="project_04_Selenium_TestNG.Tests">
                 <methods>
                     <include name="parameterizedSearchTest"/>
                 </methods>

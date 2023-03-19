@@ -1,9 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-    <test name="Tests">
+    <test name="Test7">
         <parameter name="searchedWord" value="Adobe Photoshop CS4"/>
         <classes>
-            <class name="Project_04_Selenium_TestNG.Tests">
+            <class name="project_04_Selenium_TestNG_Version2.Test07">
+                <methods>
+                    <include name="parameterizedSearchTest"/>
+                </methods>
             </class>
         </classes>
     </test>
