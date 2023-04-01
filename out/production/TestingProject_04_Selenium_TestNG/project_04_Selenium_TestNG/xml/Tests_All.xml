@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test name="Tests">
+        <parameter name="searchedWord" value="Adobe Photoshop CS4"/>
+        <classes>
+            <class name="project_04_Selenium_TestNG.Tests">
+            </class>
+        </classes>
+    </test>
+</suite>

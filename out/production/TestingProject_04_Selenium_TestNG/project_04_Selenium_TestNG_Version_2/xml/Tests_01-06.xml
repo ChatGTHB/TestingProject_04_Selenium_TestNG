@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test name="Tests_01-06">
+        <classes>
+            <class name="project_04_Selenium_TestNG_Version_2.TestsFrom01To06"/>
+        </classes>
+    </test>
+</suite>
