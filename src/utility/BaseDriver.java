@@ -23,10 +23,7 @@ public class BaseDriver {
 
         System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
-        // driver = new ChromeDriver();
+        driver = new ChromeDriver();
 
         driver.manage().window().maximize();
 
