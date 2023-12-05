@@ -21,14 +21,14 @@ import java.util.List;
 
 public class Tests extends BaseDriver {
 
-    String mail,password;
+    String mail, password;
 
     @Test(priority = 1)
     void registrationTest() {
 
         driver.get("https://demo.nopcommerce.com/register?returnUrl=%2F");
         mail = randomGenerator.internet().emailAddress();
-        password=randomGenerator.internet().password();
+        password = randomGenerator.internet().password();
 
         WebElement registerLink = driver.findElement(By.xpath("//a[text()='Register']"));
         registerLink.click();
@@ -128,7 +128,7 @@ public class Tests extends BaseDriver {
     @DataProvider
     public Object[][] getData() {
 
-        Object[][] data = {{mail, password}, {"email12345@email.com", "password12345"},};
+        Object[][] data = {{mail, password}, {randomGenerator.internet().emailAddress(), randomGenerator.internet().password()},};
         return data;
     }
 
