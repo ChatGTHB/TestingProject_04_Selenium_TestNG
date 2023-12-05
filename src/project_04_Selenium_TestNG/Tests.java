@@ -1,42 +1,43 @@
 package project_04_Selenium_TestNG;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.Parameters;
-import utility.BaseDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
+import utility.BaseDriver;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class Tests extends BaseDriver {
 
-    String eMailRandom;
+    String mail,password;
 
     @Test(priority = 1)
     void registrationTest() {
 
         driver.get("https://demo.nopcommerce.com/register?returnUrl=%2F");
-        eMailRandom = "testing" + ((int) (Math.random() * 10000)) + "@testing.com";
+        mail = randomGenerator.internet().emailAddress();
+        password=randomGenerator.internet().password();
 
         WebElement registerLink = driver.findElement(By.xpath("//a[text()='Register']"));
         registerLink.click();
 
         WebElement firstName = driver.findElement(By.id("FirstName"));
-        firstName.sendKeys("First Name");
+        firstName.sendKeys(randomGenerator.name().firstName());
 
         WebElement lastName = driver.findElement(By.id("LastName"));
-        lastName.sendKeys("Last Name");
+        lastName.sendKeys(randomGenerator.name().lastName());
 
         WebElement dayMenu = driver.findElement(By.cssSelector("[name='DateOfBirthDay']"));
         Select day = new Select(dayMenu);
@@ -54,13 +55,13 @@ public class Tests extends BaseDriver {
         year.selectByVisibleText("1993");
 
         WebElement eMail = driver.findElement(By.id("Email"));
-        eMail.sendKeys(eMailRandom);
+        eMail.sendKeys(mail);
 
-        WebElement password = driver.findElement(By.id("Password"));
-        password.sendKeys("password");
+        WebElement passwordElement = driver.findElement(By.id("Password"));
+        passwordElement.sendKeys(password);
 
         WebElement confirmPassword = driver.findElement(By.id("ConfirmPassword"));
-        confirmPassword.sendKeys("password");
+        confirmPassword.sendKeys(password);
 
         WebElement registerButton = driver.findElement(By.xpath("//button[text()='Register']"));
         registerButton.click();
@@ -79,10 +80,10 @@ public class Tests extends BaseDriver {
         loginLink.click();
 
         WebElement eMail = driver.findElement(By.id("Email"));
-        eMail.sendKeys(eMailRandom);
+        eMail.sendKeys(mail);
 
-        WebElement password = driver.findElement(By.id("Password"));
-        password.sendKeys("password");
+        WebElement passwordElement = driver.findElement(By.id("Password"));
+        passwordElement.sendKeys(password);
 
         WebElement loginButton = driver.findElement(By.xpath("//button[text()='Log in']"));
         loginButton.click();
@@ -105,22 +106,21 @@ public class Tests extends BaseDriver {
         WebElement eMail = driver.findElement(By.id("Email"));
         eMail.sendKeys(eMailPro);
 
-        WebElement password = driver.findElement(By.id("Password"));
-        password.sendKeys(passwordPro);
+        WebElement passwordElement = driver.findElement(By.id("Password"));
+        passwordElement.sendKeys(passwordPro);
 
         WebElement loginButton = driver.findElement(By.xpath("//button[text()='Log in']"));
         loginButton.click();
 
         SoftAssert softAssert = new SoftAssert();
 
-        if (passwordPro.equals("password") && eMailPro.equals(eMailRandom)) {
+        if (passwordPro.equals(password) && eMailPro.equals(mail)) {
             WebElement logoutLink = driver.findElement(By.xpath("//a[text()='Log out']"));
             softAssert.assertEquals(logoutLink.getText(), "Log out");
             logoutLink.click();
         } else {
             WebElement labelMessage = driver.findElement(By.cssSelector("div[class='message-error validation-summary-errors']"));
-            softAssert.assertEquals(labelMessage.getText(), "Login was unsuccessful. Please correct the errors and try again.\n" +
-                    "No customer account found");
+            softAssert.assertEquals(labelMessage.getText(), "Login was unsuccessful. Please correct the errors and try again.\n" + "No customer account found");
         }
         softAssert.assertAll();
     }
@@ -128,10 +128,7 @@ public class Tests extends BaseDriver {
     @DataProvider
     public Object[][] getData() {
 
-        Object[][] data = {
-                {eMailRandom, "password"},
-                {"email12345@email.com", "password12345"},
-        };
+        Object[][] data = {{mail, password}, {"email12345@email.com", "password12345"},};
         return data;
     }
 
@@ -163,17 +160,7 @@ public class Tests extends BaseDriver {
         WebElement recipientName = driver.findElement(By.className("recipient-name"));
 
         Actions actions = new Actions(driver);
-        Action action = actions.
-                moveToElement(recipientName).
-                click().
-                sendKeys("Recipient's name").
-                keyDown(Keys.TAB).
-                keyUp(Keys.TAB).
-                sendKeys("My name").
-                keyDown(Keys.TAB).
-                keyUp(Keys.TAB).
-                sendKeys("My message").
-                build();
+        Action action = actions.moveToElement(recipientName).click().sendKeys("Recipient's name").keyDown(Keys.TAB).keyUp(Keys.TAB).sendKeys("My name").keyDown(Keys.TAB).keyUp(Keys.TAB).sendKeys("My message").build();
         action.perform();
 
         WebElement addToCart = driver.findElement(By.xpath("(//button[@type='button'])[1]"));
@@ -203,13 +190,13 @@ public class Tests extends BaseDriver {
         buildComputer.click();
 
         WebElement ramSelect = wait.until(ExpectedConditions.elementToBeClickable(By.id("product_attribute_2")));
-        
+
         action = actions.moveToElement(ramSelect).build();
         action.perform();
 
         List<WebElement> ramOptions = driver.findElements(By.cssSelector("select[id='product_attribute_2']>option"));
-        ramOptions.get((int) (Math.random() * ramOptions.size()-1)+1).click();
-        
+        ramOptions.get((int) (Math.random() * ramOptions.size() - 1) + 1).click();
+
         List<WebElement> hdd = driver.findElements(By.xpath("//input[@name='product_attribute_3']"));
         hdd.get((int) (Math.random() * hdd.size())).click();
 
