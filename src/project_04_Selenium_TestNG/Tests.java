@@ -160,7 +160,16 @@ public class Tests extends BaseDriver {
         WebElement recipientName = driver.findElement(By.className("recipient-name"));
 
         Actions actions = new Actions(driver);
-        Action action = actions.moveToElement(recipientName).click().sendKeys("Recipient's name").keyDown(Keys.TAB).keyUp(Keys.TAB).sendKeys("My name").keyDown(Keys.TAB).keyUp(Keys.TAB).sendKeys("My message").build();
+        Action action = actions.
+                moveToElement(recipientName).
+                click().sendKeys("Recipient's name").
+                keyDown(Keys.TAB).
+                keyUp(Keys.TAB).
+                sendKeys("My name").
+                keyDown(Keys.TAB).
+                keyUp(Keys.TAB).
+                sendKeys("My message").
+                build();
         action.perform();
 
         WebElement addToCart = driver.findElement(By.xpath("(//button[@type='button'])[1]"));
