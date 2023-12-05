@@ -1,5 +1,6 @@
 package utility;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -15,29 +16,24 @@ import java.util.logging.Logger;
 public class BaseDriver {
     public static WebDriver driver;
     public static WebDriverWait wait;
+    public static Faker randomGenerator;
+
     @BeforeClass
     public void startingOperations() {
 
         Logger logger = Logger.getLogger("");
         logger.setLevel(Level.SEVERE);
 
-        System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
-
         driver = new ChromeDriver();
-
         driver.manage().window().maximize();
-
-        Duration duration = Duration.ofSeconds(30);
-        driver.manage().timeouts().pageLoadTimeout(duration);
-
-        driver.manage().timeouts().implicitlyWait(duration);
-
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-
+        randomGenerator = new Faker();
     }
+
     @AfterClass
     public void endingOperations() {
-        Tools.wait(5);
         driver.quit();
     }
 }
