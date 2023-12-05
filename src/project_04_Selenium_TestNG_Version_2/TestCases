@@ -1,6 +1,6 @@
 Techno Study Testing Project 4
 
-• Projeyi Selenium ve TestNG kullanarak çözünüz.
+• Projeyi Selenium ve TestNG kullanarak hazırlayınız
 
 • Projenizde DependsOnMethod,Priority kullanarak testleri birbirine bağımlı hale getiriniz(gerekli
 olanları).
@@ -14,7 +14,7 @@ Test Case 1: Registrations Test
 
 ➢ https://demo.nopcommerce.com/register?returnUrl=%2F Sitesine gidiniz
 
-➢ Register butonuna tıklayınız
+➢ Register linkine tıklayınız
 
 ➢ First Name ve Last Name giriniz
 
