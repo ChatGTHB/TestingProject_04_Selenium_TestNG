@@ -96,7 +96,7 @@ public class Tests extends BaseDriver {
     }
 
     @Test(dataProvider = "getData", dependsOnMethods = {"registrationTest"}, priority = 3)
-    void dataProviderLoginTest(String eMailPro, String passwordPro) {
+    void dataProviderLoginTest(String mailPro, String passwordPro) {
 
         driver.get("https://demo.nopcommerce.com/register?returnUrl=%2F");
 
@@ -104,7 +104,7 @@ public class Tests extends BaseDriver {
         loginLink.click();
 
         WebElement eMail = driver.findElement(By.id("Email"));
-        eMail.sendKeys(eMailPro);
+        eMail.sendKeys(mailPro);
 
         WebElement passwordElement = driver.findElement(By.id("Password"));
         passwordElement.sendKeys(passwordPro);
@@ -114,7 +114,7 @@ public class Tests extends BaseDriver {
 
         SoftAssert softAssert = new SoftAssert();
 
-        if (passwordPro.equals(password) && eMailPro.equals(mail)) {
+        if (passwordPro.equals(password) && mailPro.equals(mail)) {
             WebElement logoutLink = driver.findElement(By.xpath("//a[text()='Log out']"));
             softAssert.assertEquals(logoutLink.getText(), "Log out");
             logoutLink.click();
@@ -122,13 +122,13 @@ public class Tests extends BaseDriver {
             WebElement labelMessage = driver.findElement(By.cssSelector("div[class='message-error validation-summary-errors']"));
             softAssert.assertEquals(labelMessage.getText(), "Login was unsuccessful. Please correct the errors and try again.\n" + "No customer account found");
         }
+
         softAssert.assertAll();
     }
 
     @DataProvider
     public Object[][] getData() {
-
-        Object[][] data = {{mail, password}, {randomGenerator.internet().emailAddress(), randomGenerator.internet().password()},};
+        Object[][] data = {{mail, password}, {randomGenerator.internet().emailAddress(), randomGenerator.internet().password()}};
         return data;
     }
 
@@ -160,16 +160,7 @@ public class Tests extends BaseDriver {
         WebElement recipientName = driver.findElement(By.className("recipient-name"));
 
         Actions actions = new Actions(driver);
-        Action action = actions.
-                moveToElement(recipientName).
-                click().sendKeys("Recipient's name").
-                keyDown(Keys.TAB).
-                keyUp(Keys.TAB).
-                sendKeys("My name").
-                keyDown(Keys.TAB).
-                keyUp(Keys.TAB).
-                sendKeys("My message").
-                build();
+        Action action = actions.moveToElement(recipientName).click().sendKeys("Recipient's name").keyDown(Keys.TAB).keyUp(Keys.TAB).sendKeys("My name").keyDown(Keys.TAB).keyUp(Keys.TAB).sendKeys("My message").build();
         action.perform();
 
         WebElement addToCart = driver.findElement(By.xpath("(//button[@type='button'])[1]"));
