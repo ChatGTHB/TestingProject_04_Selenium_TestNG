@@ -151,20 +151,28 @@ public class Tests extends BaseDriver {
 
         driver.get("https://demo.nopcommerce.com/register?returnUrl=%2F");
 
-        WebElement giftCards = driver.findElement(By.xpath("(//ul[@class='top-menu notmobile']/li)[7]"));
+        WebElement giftCards = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//ul[@class='top-menu notmobile']/li)[7]")));
         giftCards.click();
 
-        List<WebElement> physicalGiftCards = driver.findElements(By.xpath(".//a[contains(text(),'Physical')]"));
-        physicalGiftCards.get(((int) (Math.random() * physicalGiftCards.size()))).click();
+        List<WebElement> physicalGiftCards =wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//a[contains(text(),'Physical')]"))) ;
+        physicalGiftCards.get((int) (Math.random() * physicalGiftCards.size())).click();
 
-        WebElement recipientName = driver.findElement(By.className("recipient-name"));
+        WebElement recipientName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("recipient-name")));
 
         Actions actions = new Actions(driver);
-        Action action = actions.moveToElement(recipientName).click().sendKeys("Recipient's name").keyDown(Keys.TAB).keyUp(Keys.TAB).sendKeys("My name").keyDown(Keys.TAB).keyUp(Keys.TAB).sendKeys("My message").build();
+        Action action = actions
+                .moveToElement(recipientName)
+                .click()
+                .sendKeys(randomGenerator.name().fullName())
+                .sendKeys(Keys.TAB)
+                .sendKeys(randomGenerator.name().fullName())
+                .sendKeys(Keys.TAB)
+                .sendKeys(randomGenerator.chuckNorris().fact())
+                .sendKeys(Keys.TAB)
+                .sendKeys(Keys.TAB)
+                .sendKeys(Keys.ENTER)
+                .build();
         action.perform();
-
-        WebElement addToCart = driver.findElement(By.xpath("(//button[@type='button'])[1]"));
-        addToCart.click();
 
         WebElement verificationMessage = driver.findElement(By.xpath("//p[text()='The product has been added to your ']"));
 
@@ -189,13 +197,10 @@ public class Tests extends BaseDriver {
         WebElement buildComputer = driver.findElement(By.xpath("//a[text()='Build your own computer']"));
         buildComputer.click();
 
-        WebElement ramSelect = wait.until(ExpectedConditions.elementToBeClickable(By.id("product_attribute_2")));
-
-        action = actions.moveToElement(ramSelect).build();
-        action.perform();
-
-        List<WebElement> ramOptions = driver.findElements(By.cssSelector("select[id='product_attribute_2']>option"));
-        ramOptions.get((int) (Math.random() * ramOptions.size() - 1) + 1).click();
+        WebElement ramMenu = wait.until(ExpectedConditions.elementToBeClickable(By.id("product_attribute_2")));
+        Select ramSelect=new Select(ramMenu);
+        List<WebElement> ramOptions = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("select[id='product_attribute_2']>option")));
+        ramSelect.selectByIndex((int) (Math.random() * ramOptions.size() - 1) + 1);
 
         List<WebElement> hdd = driver.findElements(By.xpath("//input[@name='product_attribute_3']"));
         hdd.get((int) (Math.random() * hdd.size())).click();
