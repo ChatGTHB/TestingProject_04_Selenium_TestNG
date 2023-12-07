@@ -112,18 +112,14 @@ public class Tests extends BaseDriver {
         WebElement loginButton = driver.findElement(By.xpath("//button[text()='Log in']"));
         loginButton.click();
 
-        SoftAssert softAssert = new SoftAssert();
-
         if (passwordPro.equals(password) && mailPro.equals(mail)) {
             WebElement logoutLink = driver.findElement(By.xpath("//a[text()='Log out']"));
-            softAssert.assertEquals(logoutLink.getText(), "Log out");
+            Assert.assertEquals(logoutLink.getText(), "Log out");
             logoutLink.click();
         } else {
             WebElement labelMessage = driver.findElement(By.cssSelector("div[class='message-error validation-summary-errors']"));
-            softAssert.assertEquals(labelMessage.getText(), "Login was unsuccessful. Please correct the errors and try again.\n" + "No customer account found");
+            Assert.assertEquals(labelMessage.getText(), "Login was unsuccessful. Please correct the errors and try again.\n" + "No customer account found");
         }
-
-        softAssert.assertAll();
     }
 
     @DataProvider
