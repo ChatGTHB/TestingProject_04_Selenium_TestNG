@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="All Test Suite" parallel="tests" thread-count="2">
+
+    <test name="TestsFirefox">
+        <parameter name="searchedWord" value="Adobe Photoshop CS4"/>
+        <parameter name="browserType" value="firefox"></parameter>
+        <classes>
+            <class name="project_04_Selenium_TestNG_ParallelTest.Tests"/>
+        </classes>
+    </test>
+
+    <test name="TestsEdge">
+        <parameter name="searchedWord" value="Adobe Photoshop CS4"/>
+        <parameter name="browserType" value="edge"></parameter>
+        <classes>
+            <class name="project_04_Selenium_TestNG_ParallelTest.Tests"/>
+        </classes>
+    </test>
+
+</suite>
