@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import utility.BaseDriver;
+import utilities.BaseDriver;
 
 public class Test07 extends BaseDriver {
 
