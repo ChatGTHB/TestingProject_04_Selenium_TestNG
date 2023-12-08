@@ -211,12 +211,12 @@ public class Tests extends BaseDriver {
 
     @Test(priority = 7)
     @Parameters("searchedWord")
-    void parameterizedSearchTest(String searchedWord) {
+    void parameterizedSearchTest(String searchedText) {
 
         driver.get("https://demo.nopcommerce.com/register?returnUrl=%2F");
 
         WebElement searchBox = driver.findElement(By.id("small-searchterms"));
-        searchBox.sendKeys(searchedWord);
+        searchBox.sendKeys(searchedText);
 
         WebElement searchButton = driver.findElement(By.xpath("//button[text()='Search']"));
         searchButton.click();
