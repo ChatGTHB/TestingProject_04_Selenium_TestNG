@@ -11,7 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import utility.BaseDriver;
+import utilities.BaseDriver;
 
 import java.util.ArrayList;
 import java.util.Arrays;
