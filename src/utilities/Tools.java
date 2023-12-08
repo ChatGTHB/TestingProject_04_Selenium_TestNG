@@ -1,4 +1,4 @@
-package utility;
+package utilities;
 
 import org.openqa.selenium.*;
 import org.testng.Assert;
